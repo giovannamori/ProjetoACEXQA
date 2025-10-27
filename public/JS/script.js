@@ -1,11 +1,11 @@
 // Configuração do Firebase (substitua com suas credenciais)
 const firebaseConfig = {
-    apiKey: "AIzaSyBg_LBg0LoH7ADKPHN571ARxEjhgUN2TmE",
-    authDomain: "bazar-46805.firebaseapp.com",
-    projectId: "bazar-46805",
-    storageBucket: "bazar-46805.firebasestorage.app",
-    messagingSenderId: "296506105856",
-    appId: "1:296506105856:web:bb261ba6c4a2406d52b8e5"
+  apiKey: "AIzaSyC0FPLJlifyJImPS8hNXnifEQPDXAnGuW8",
+  authDomain: "qabazar-ffe21.firebaseapp.com",
+  projectId: "qabazar-ffe21",
+  storageBucket: "qabazar-ffe21.firebasestorage.app",
+  messagingSenderId: "183120823667",
+  appId: "1:183120823667:web:b4563c32a6f1046003f106"
 };
 
 // Inicialize o Firebase
