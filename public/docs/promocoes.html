@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promoções</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!--ícone de sair-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/public/CSS/promocoes.css">
     <link rel="shortcut icon" href="/public/docs/imagens/logo.png" type="image/x-icon">
 </head>
@@ -36,7 +36,7 @@
                         <a class="nav-link active" href="promocoes.html">Promoções</a>
                     </li>
                 </ul>
-            <button class="btn btn-sair ms-2" onclick="sair()"><!--deixa o botão "sair" para direita-->
+            <button class="btn btn-sair ms-2" onclick="sair()">
               <i class="fas fa-sign-out-alt"></i> Sair
             </button>
             </div>
@@ -46,57 +46,61 @@
     <div class="container-alt">
         <center> <h3> Promoções </h3></center>
         <form id="promoForm">
-            <label>Data da Promoção: </label> 
-                <input class="form-control" type="date" id="promoDate">
-            <br>
-            <label>Desconto (%): </label>
-                <input class="form-control" type="number" id="promoDiscount" min="1" max="100">
-            <br>
-            <label for="categorias">Categorias:</label>
-            <select id="categorias" name="categorias">
-            
-            <option value="">Selecione uma categoria</option>
-            </select>
-            <br>
-            <button type="button" id="btnAddCategoria">Adicionar categoria</button>
-            <div id="novaCategoriaDiv" style="display:none;">
-
-            <input type="text" id="novaCategoriaInput" placeholder="Digite nova categoria">
-            <button type="button" id="salvarCategoria">Salvar categoria</button>
+            <div class="form-group">
+                <label>Data da Promoção: </label> 
+                <input class="form-control" type="date" id="promoDate" required>
             </div>
             
-            <button type="submit" id="btnEnviarPromocao">Enviar promoção</button>
+            <div class="form-group">
+                <label>Desconto (%): </label>
+                <input class="form-control" type="number" id="promoDiscount" min="1" max="100" required>
+            </div>
+            
+            <div class="categorias-section">
+                <div class="categorias-header" id="toggleCategorias">
+                    <h5>Categorias</h5>
+                    <i class="fas fa-chevron-down" id="toggleIcon"></i>
+                </div>
+                <div class="categorias-content" id="categoriasContent">
+                    <div id="categoriasContainer"></div>
+                    
+                    <button type="button" id="btnAddCategoria" class="btn-small">Adicionar categoria</button>
+                    
+                    <!-- Campo para criar nova categoria -->
+                    <div id="novaCategoriaDiv" style="display:none; margin-top:10px;">
+                        <div class="nova-categoria-row">
+                            <input type="text" id="novaCategoriaInput" placeholder="Digite nova categoria">
+                            <div class="btn-group">
+                                <button type="button" id="salvarCategoria" class="btn-small">Salvar</button>
+                                <button type="button" id="fecharCategoria" class="btn-close">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" id="loadingIndicator">
+                <div class="loading-spinner"></div>
+                <p>Enviando promoções...</p>
+            </div>
+
+            <button type="submit" id="btnEnviarPromocao" class="btn-primary">Enviar promoção</button>
         </form>
     </div>
 
-        <!-- Firebase App (compat) -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <!-- Firebase App (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
 
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-    emailjs.init("jxlPp_eP3O_5Dv6BF");
-    </script>
-    
+
     <!-- Bootstrap Bundle (com JS e Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        const firebaseConfig = {
-        apiKey: "AIzaSyBg_LBg0LoH7ADKPHN571ARxEjhgUN2TmE",
-        authDomain: "bazar-46805.firebaseapp.com",
-        projectId: "bazar-46805",
-        storageBucket: "bazar-46805.appspot.com",
-        messagingSenderId: "296506105856",
-        appId: "1:296506105856:web:bb261ba6c4a2406d52b8e5"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-    </script>
-    
     <script src="/public/JS/promocoes.js"></script>
 
 </body>

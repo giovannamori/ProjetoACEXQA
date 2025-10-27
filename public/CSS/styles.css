@@ -1,15 +1,39 @@
+:root {
+  --primary-color: #F2C2CF;
+  --primary-hover: #e694aa;
+  --secondary-color: #fee8f0;
+  --accent-color: #F5AAC8;
+  --text-color: #333;
+  --light-bg: rgba(255, 255, 255, 0.9);
+  --important-color: #fff9c4;
+}
+
 body {
-font-family: Arial, sans-serif;
-font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  /*font-size: 20px;*/
+  padding-bottom: 20px;
 }
 
 .navbar-custom {
-background-color: #fee8f0;/*cor de fundo da navbar*/
+  background-color: var(--secondary-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* cor do título navbar */
-.navbar-color {
-  color: #333;
+.navbar-brand {
+  font-weight: bold;
+  color: var(--text-color) !important;
+}
+
+.nav-link {
+  color: var(--text-color) !important;
+  transition: all 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--accent-color) !important;
+  transform: translateY(-2px);
 }
 
 img {
@@ -169,7 +193,3 @@ word-break: break-word;
 .login-container button:hover {
   background: #e694aa;
 }
-
-
-
-

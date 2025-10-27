@@ -1,21 +1,50 @@
-body { 
-    font-family: Arial, sans-serif;
-    font-size: 20px;
+:root {
+  --primary-color: #F2C2CF;
+  --primary-hover: #e694aa;
+  --secondary-color: #fee8f0;
+  --accent-color: #F5AAC8;
+  --text-color: #333;
+  --light-bg: rgba(255, 255, 255, 0.9);
+  --important-color: #fff9c4;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  /*font-size: 20px;*/
+  padding-bottom: 20px;
 }
 
 .navbar-custom {
-    background-color: #fee8f0;
+  background-color: var(--secondary-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: var(--text-color) !important;
+}
+
+/* cor do título navbar */
+.navbar-color {
+  color: var(--text-color);
+}
+
+.nav-link {
+  color: var(--text-color) !important;
+  transition: all 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--accent-color) !important;
+  transform: translateY(-2px);
 }
 
 img {
   margin:10px;
   width:75px;
   margin-left:10px;
-}
-
-/* cor do título navbar */
-.navbar-color {
-  color: #333;
 }
 
 .container {
@@ -25,11 +54,11 @@ img {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    box-shadow: 0 0 15px #F5AAC8;
+    box-shadow: var(--accent-color);
 }
 
 h3 {
-    color: #333;
+    color: var(--text-color);
     text-align: center;
     margin-bottom: 30px;
 }
@@ -49,30 +78,30 @@ h3 {
 
 /* Estilo específico para o botão de sair */
 .btn-sair {
-background: #F2C2CF;
-color: #333;
-padding: 5px 10px;  /* Reduzi o padding */
-font-size: 15px;  
-margin-left: 10px;  /* Ajuste a margem conforme necessário */
-height: auto;      /* Garante que a altura seja automática */
-width: auto;       /* Garante que a largura seja automática */
-line-height: 1;    /* Melhora o alinhamento vertical do texto/ícone */
+    background: var(--primary-color);
+    color: var(--text-color);
+    padding: 5px 10px;  /* Reduzi o padding */
+    font-size: 15px;  
+    margin-left: 10px;  /* Ajuste a margem conforme necessário */
+    height: auto;      /* Garante que a altura seja automática */
+    width: auto;       /* Garante que a largura seja automática */
+    line-height: 1;    /* Melhora o alinhamento vertical do texto/ícone */
 }
 
 .btn-sair:hover {
-background: #e694aa;
+    background: var(--primary-hover);
 }
 
 /* ícone de sair */
 .btn-sair i { 
-font-size: 15px;  
-margin-right: 3px; /* Espaço entre ícone e texto */
+    font-size: 15px;  
+    margin-right: 3px; /* Espaço entre ícone e texto */
 }
 
 
 .btn-export {
-    background-color: #F2C2CF;
-    color: #333;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -82,7 +111,7 @@ margin-right: 3px; /* Espaço entre ícone e texto */
 }
 
 .btn-export:hover {
-    background-color: #e694aa;
+    background-color: var(--primary-hover);
 }
 
 .btn-pdf {

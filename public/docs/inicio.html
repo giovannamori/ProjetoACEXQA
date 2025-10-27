@@ -56,20 +56,14 @@
                 </div>
                 
                 <label for="itemQuantidade">Quantidade de itens:</label>
-                <select class="form-control" id="itemQuantidade">
-                <option value="" disabled selected>Selecione uma opção</option>
-            <!-- Pode aumentar até o limite que você quiser -->
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    id="itemQuantidade" 
+                    name="itemQuantidade" 
+                    min="1" 
+                    placeholder="Digite a quantidade">
+
                 <br>
                 <label for="formaPagamento"> Forma de pagamento: </label>
                 <select class="form-control" id="formaPagamento">

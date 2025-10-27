@@ -1,90 +1,246 @@
+:root {
+    --primary-color: #F2C2CF;
+    --primary-hover: #e694aa;
+    --secondary-color: #fee8f0;
+    --accent-color: #F5AAC8;
+    --text-color: #333;
+    --light-bg: rgba(255, 255, 255, 0.9);
+    --important-color: #fff9c4;
+}
+
 body {
-font-family: Arial, sans-serif;
-font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: var(--text-color);
+    padding-bottom: 20px;
 }
 
 .navbar-custom {
-background-color: #fee8f0;/*cor de fundo da navbar*/
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* cor do título navbar */
+.navbar-brand {
+    font-weight: bold;
+    color: var(--text-color) !important;
+}
+
+
 .navbar-color {
-  color: #333;
+    color: var(--text-color);
+}
+
+.nav-link {
+    color: var(--text-color) !important;
+    transition: all 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--accent-color) !important;
+    transform: translateY(-2px);
 }
 
 img {
-  margin:10px;
-  width:75px;
-  margin-left:10px;
+    margin:10px;
+    width:75px;
+    margin-left:10px;
 }
 
 .container-alt {
-max-width: 600px;
-margin: auto;
-background: rgba(255, 255, 255, 0.7);
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 0 15px #F5AAC8;
+    max-width: 600px;
+    margin: auto;
+    background: var(--light-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 form {
-background: white;
-color: #333;
-padding: 15px;
-border-radius: 10px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: white;
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 input {
-margin: 5px 0;
-padding: 10px;
-width: calc(100% - 20px);
-border-radius: 10px;
-border: 1px solid #ddd;  
+    margin: 5px 0;
+    padding: 10px;
+    width: calc(100% - 20px);
+    border-radius: 10px;
+    border: 1px solid #ddd;  
 }
 
 button {
-background: #F2C2CF;
-color: #333;
-font-size: 18px;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-padding: 12px;
-border-radius: 10px;
-border: 1px solid #ddd;
-font-size: 18px;
-margin-top: 15px;
+    background: var(--primary-color);
+    color: var(--text-color);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    margin-top: 15px;
+    transition: all 0.3s;
 }
 
 button:hover {
-background: #e694aa;
+    background: var(--primary-hover);
+    transform: translateY(-2px);
 }
 
-/* Estilo específico para o botão de sair */
+
 .btn-sair {
-background: #F2C2CF;
-color: #333;
-padding: 5px 10px;  /* Reduzi o padding */
-font-size: 15px;   /* Aumentei um pouco o tamanho da fonte para ficar legível */
-margin-left: 10px;  /* Ajuste a margem conforme necessário */
-height: auto;      /* Garante que a altura seja automática */
-width: auto;       /* Garante que a largura seja automática */
-line-height: 1;    /* Melhora o alinhamento vertical do texto/ícone */
-margin-right: 3px;
+    background: var(--primary-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    font-size: 15px;
+    margin-left: 10px;
+    height: auto;
+    width: auto;
+    line-height: 1;
 }
 
 .btn-sair:hover {
-background: #e694aa;
+    background:  var(--primary-hover);
 }
 
-/* ícone de sair */
+
 .btn-sair i { 
-font-size: 15px;  
-margin-right: 3px; /* Espaço entre ícone e texto */
+    font-size: 15px;  
+    margin-right: 3px;
 }
 
+/* Estilos para a seção de categorias */
+.categorias-section {
+    margin: 15px 0;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
- 
+.categorias-header {
+    background-color: var(--secondary-color);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.categorias-header h5 {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.categorias-content {
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+}
+
+.categorias-content.collapsed {
+    max-height: 0;
+    padding: 0 15px;
+    overflow: hidden;
+}
+
+.categoria-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.categoria-item input {
+    margin-right: 10px;
+    width: auto;
+}
+
+.nova-categoria-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.nova-categoria-row input {
+    flex: 1;
+    margin: 0;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-small {
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-top: 0;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #dc3545;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.btn-close:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.loading {
+    display: none;  /* ← Já está assim, então está correto */
+    text-align: center;
+    margin: 10px 0;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+.btn-excluir {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.btn-excluir:hover {
+    background: #c82333;
+}

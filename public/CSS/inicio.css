@@ -1,15 +1,44 @@
+:root {
+  --primary-color: #F2C2CF;
+  --primary-hover: #e694aa;
+  --secondary-color: #fee8f0;
+  --accent-color: #F5AAC8;
+  --text-color: #333;
+  --light-bg: rgba(255, 255, 255, 0.9);
+  --important-color: #fff9c4;
+}
+
 body {
-font-family: Arial, sans-serif;
-font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  /*font-size: 20px;*/
+  padding-bottom: 20px;
 }
 
 .navbar-custom {
-background-color: #fee8f0;/*cor de fundo da navbar*/
+  background-color: var(--secondary-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: var(--text-color) !important;
 }
 
 /* cor do título navbar */
 .navbar-color {
-  color: #333;
+  color: var(--text-color);
+}
+
+.nav-link {
+  color: var(--text-color) !important;
+  transition: all 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--accent-color) !important;
+  transform: translateY(-2px);
 }
 
 img {
@@ -19,17 +48,17 @@ img {
 }
 
 .container-alt {
-max-width: 600px;
-margin: auto;
-background: rgba(255, 255, 255, 0.7);
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 0 15px #F5AAC8;
+  max-width: 600px;
+  margin: auto;
+  background: var(--light-bg);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--accent-color) 0px 4px 15px;
 }
 
 form {
 background: white;
-color: #333;
+color: var(--text-color);
 padding: 15px;
 border-radius: 10px;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -45,8 +74,8 @@ border: 1px solid #ddd;
 
 /* Estilo para o botão adicionar */
 button {
-background: #F2C2CF;
-color: #333;
+background: var(--primary-color);
+color: var(--text-color);
 font-size: 18px;
 cursor: pointer;
 display: flex;
@@ -59,13 +88,13 @@ border-radius: 4px;
 }
 
 button:hover {
-background: #e694aa;
+background: var(--primary-hover);
 }
 
 /* Estilo específico para o botão de sair */
 .btn-sair {
-background: #F2C2CF;
-color: #333;
+background: var(--primary-color);
+color: var(--text-color);
 padding: 5px 10px;  /* Reduzi o padding */
 font-size: 15px;   /* Aumentei um pouco o tamanho da fonte para ficar legível */
 margin-left: 10px;  /* Ajuste a margem conforme necessário */
@@ -75,7 +104,7 @@ line-height: 1;    /* Melhora o alinhamento vertical do texto/ícone */
 }
 
 .btn-sair:hover {
-background:  #e694aa;
+background:  var(--primary-hover);
 }
 
 /* ícone de sair */
