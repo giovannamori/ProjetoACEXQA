@@ -334,29 +334,146 @@ async function sendSaleByEmail(saleId, recipientEmail) {
     }
 }
 
-// Função para gerar PDF
-async function generateSalePDF(saleId, email = null) {
+async function generatePDFForEmail(saleId) {
     try {
-        if (email) {
-            return await sendSaleByEmail(saleId, email);
-        } else {
-            // Implementação do PDF...
-            showStatus("PDF gerado com sucesso!", "success");
-        }
+        const saleDoc = await db.collection('vendas').doc(saleId).get();
+        const sale = saleDoc.data();
+
+        const { jsPDF } = window.jspdf;
+
+        // Criar documento no formato de ticket (80mm x 200mm)
+       const doc = new jsPDF({
+    unit: "mm",
+    format: [80, 200] // largura 80mm, altura ajustável
+});
+
+let y = 10;
+
+// Adicionar logo (opcional)
+const logoData = await loadLogo();
+if (logoData) {
+    doc.addImage(logoData, "PNG", 25, y, 30, 20);
+    y += 25;
+}
+
+// Cabeçalho oficial
+doc.setFontSize(14);
+doc.setFont(undefined, "bold");
+doc.text("Comprovante de Venda", 40, y, { align: "center" });
+y += 8;
+
+doc.setFontSize(11);
+doc.setFont(undefined, "normal");
+doc.text("Bazar Beneficente São Jerônimo", 40, y, { align: "center" }); y += 6;
+doc.text("CNPJ: 17.770.702/0004-08", 40, y, { align: "center" }); y += 6;
+doc.text("Rua Rodrigues da Costa, 10", 40, y, { align: "center" }); y += 8;
+doc.text("Vila Rica - Santo André/SP", 40, y, { align: "center" }); y += 8;
+doc.line(5, y, 75, y); y += 8;
+
+// Dados da venda
+doc.setFontSize(10);
+doc.text(`Venda ID: ${saleId}`, 5, y); y += 5;
+const [ano, mes, dia] = sale.data.split("-");
+const dataFormatada = `${dia}/${mes}/${ano}`;
+doc.text(`Data/Hora: ${dataFormatada}`, 5, y); y += 5;
+doc.text(`Comprador: ${sale.comprador || "Não informado"}`, 5, y); y += 5;
+doc.text(`Telefone: ${sale.telefone || "Não informado"}`, 5, y); y += 5;
+doc.text(`Email: ${sale.email || "Não informado"}`, 5, y); y += 8;
+doc.line(5, y, 75, y); y += 8;
+
+// Mostrar quantidade de itens
+doc.text(`Quantidade total de itens: ${sale.quantidadeitens}`, 5, y);  y += 5;
+doc.text(`Forma de pagamento: ${sale.formaPagamento}`, 5, y);  y += 5;
+y += 8;
+
+// Total
+doc.setFont(undefined, "bold");
+doc.setFontSize(11);
+doc.text(`VALOR TOTAL: R$ ${sale.valor.toFixed(2)}`, 75, y, { align: "right" });
+y += 12;
+
+// Rodapé
+doc.setFontSize(9);
+doc.setFont(undefined, "normal");
+doc.text("Este documento comprova a venda realizada", 40, y, { align: "center" }); y += 4;
+doc.text("no Bazar Beneficente São Jerônimo.", 40, y, { align: "center" }); y += 4;
+doc.text("Obrigado por apoiar nossa causa!", 40, y, { align: "center" });
+
+// Retorna o PDF como base64
+return doc.output("dataurlstring");
+
     } catch (error) {
         console.error("Erro ao gerar PDF:", error);
-        showStatus("Erro ao gerar PDF: " + error.message, "error");
+        throw error;
     }
 }
 
-// Função para sair do sistema
-function sair() {
-    if(confirm('Tem certeza que deseja sair do sistema?')) {
-        firebase.auth().signOut().then(() => {
-            window.location.href = '/index.html';
-        });
-    }
-}
+        // Função principal para gerar PDF (com opção de enviar por email)
+        async function generateSalePDF(saleId, email = null) {
+            try {
+                if (email) {
+                    // Se tiver email, envia por email usando a versão simplificada
+                    return await sendSaleByEmail(saleId, email);
+                } else {
+                    // Caso contrário, faz download usando a versão completa
+                    const pdfData = await generatePDFForEmail(saleId);
+                    const blob = dataURItoBlob(pdfData);
+                    saveAs(blob, `comprovante_venda.pdf`);
+                    showStatus("PDF gerado com sucesso!", "success");
+                }
+            } catch (error) {
+                console.error("Erro ao gerar PDF:", error);
+                showStatus("Erro ao gerar PDF: " + error.message, "error");
+            }
+        }
+        
+        // Função auxiliar para carregar logo
+        async function loadLogo() {
+            try {
+                const response = await fetch('/public/docs/imagens/logo.png');
+                const blob = await response.blob();
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.readAsDataURL(blob);
+                });
+            } catch {
+                return null;
+            }
+        }
+        
+        // Função para converter data URI para Blob
+        function dataURItoBlob(dataURI) {
+            const byteString = atob(dataURI.split(',')[1]);
+            const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            
+            return new Blob([ab], { type: mimeString });
+        }
+        
+        // Função para salvar o Blob como arquivo
+        function saveAs(blob, filename) {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Função para sair do sistema
+        function sair() {
+            if(confirm('Tem certeza que deseja sair do sistema?')) {
+                firebase.auth().signOut().then(() => {
+                    window.location.href = '/index.html';
+                });
+            }
+        }
 
 // Verificação de autenticação ao carregar a página
 firebase.auth().onAuthStateChanged((user) => {
