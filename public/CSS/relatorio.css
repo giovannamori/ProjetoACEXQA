@@ -144,6 +144,14 @@ h3 {
     width: 70px;
 }
 
+td:nth-child(5) {
+    word-break: break-all;      /* quebra o texto mesmo sem espaços */
+        /* permite a quebra de linha */
+    min-width: 180px;           /* largura mínima */
+    max-width: 250px;           /* evita estourar a tabela */
+}
+
+
 .btn-email:hover {
     background-color: #45a049;
 }
@@ -195,6 +203,11 @@ tr:hover {
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
+    justify-content: flex-end; /* Alinha os botões à direita */
+}
+td.action-buttons {
+    text-align: right;
+    padding-right: 15px; /* opcional, ajusta a distância da borda */
 }
 
 .truncate-cell {
